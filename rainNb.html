@@ -13087,17 +13087,15 @@ div#notebook {
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="prompt input_prompt">In&nbsp;[21]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class=" highlight hl-python"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.model_selection</span> <span class="kn">import</span> <span class="n">train_test_split</span>
-<span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">GaussianNB</span><span class="p">,</span> <span class="n">MultinomialNB</span>
-<span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
-<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span>
+<span class="kn">from</span> <span class="nn">sklearn.metrics</span> <span class="kn">import</span> <span class="n">confusion_matrix</span><span class="p">,</span> <span class="n">classification_report</span><span class="p">,</span> <span class="n">precision_recall_fscore_support</span>
 <span class="kn">from</span> <span class="nn">sklearn.preprocessing</span> <span class="kn">import</span> <span class="n">minmax_scale</span>
 </pre></div>
 
@@ -13111,7 +13109,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[2]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dados/rain/weatherAUS.csv&quot;</span><span class="p">)</span>
+<div class=" highlight hl-python"><pre><span></span><span class="n">data</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;dados/rain/weatherAUS.csv&quot;</span><span class="p">)</span>
 <span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 
@@ -13309,7 +13307,7 @@ div#notebook {
 <div class="prompt input_prompt">In&nbsp;[3]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class=" highlight hl-python"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -13376,7 +13374,7 @@ memory usage: 25.5+ MB
 <div class="prompt input_prompt">In&nbsp;[4]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">maskYesNoTo10</span> <span class="o">=</span> <span class="p">{</span>
+<div class=" highlight hl-python"><pre><span></span><span class="n">maskYesNoTo10</span> <span class="o">=</span> <span class="p">{</span>
     <span class="s2">&quot;No&quot;</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
     <span class="s2">&quot;Yes&quot;</span><span class="p">:</span> <span class="mi">1</span>
 <span class="p">}</span>
@@ -13583,7 +13581,7 @@ memory usage: 25.5+ MB
 <div class="prompt input_prompt">In&nbsp;[5]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class=" highlight hl-python"><pre><span></span><span class="n">data</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
 </pre></div>
 
     </div>
@@ -13638,12 +13636,20 @@ memory usage: 25.5+ MB
 </div>
 
 </div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Algumas colunas serão descartadas, pois (...)</p>
+
+</div>
+</div>
+</div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
 <div class="prompt input_prompt">In&nbsp;[6]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">data_reduced</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="s2">&quot;Location&quot;</span><span class="p">,</span> <span class="s2">&quot;WindGustDir&quot;</span><span class="p">,</span> <span class="s2">&quot;WindDir9am&quot;</span><span class="p">,</span> <span class="s2">&quot;WindDir3pm&quot;</span><span class="p">])</span>
+<div class=" highlight hl-python"><pre><span></span><span class="n">data_reduced</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">drop</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Date&quot;</span><span class="p">,</span> <span class="s2">&quot;Location&quot;</span><span class="p">,</span> <span class="s2">&quot;WindGustDir&quot;</span><span class="p">,</span> <span class="s2">&quot;WindDir9am&quot;</span><span class="p">,</span> <span class="s2">&quot;WindDir3pm&quot;</span><span class="p">])</span>
 <span class="n">data_reduced</span> <span class="o">=</span> <span class="n">data_reduced</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span>
 <span class="n">data_reduced</span>
 </pre></div>
@@ -13948,18 +13954,19 @@ memory usage: 25.5+ MB
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Estrat&#233;gia-simples">Estrat&#233;gia simples<a class="anchor-link" href="#Estrat&#233;gia-simples">&#182;</a></h2><p>Agora, avaliaremos as proporções da variável dependente nos dados de treino.</p>
+<h2 id="Estrat&#233;gia-Ing&#234;nua">Estrat&#233;gia Ing&#234;nua<a class="anchor-link" href="#Estrat&#233;gia-Ing&#234;nua">&#182;</a></h2><p>Agora, avaliaremos as proporções da variável dependente nos dados de treino.</p>
 
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="prompt input_prompt">In&nbsp;[15]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">val</span> <span class="o">=</span> <span class="n">data_reduced</span><span class="p">[</span><span class="s2">&quot;RainTomorrow&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
-<span class="p">[</span><span class="n">val</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">val</span><span class="p">),</span> <span class="n">val</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">val</span><span class="p">)]</span>
+<div class=" highlight hl-python"><pre><span></span><span class="n">naiveData</span> <span class="o">=</span> <span class="n">data_reduced</span><span class="p">[</span><span class="s2">&quot;RainTomorrow&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">naive</span> <span class="o">=</span> <span class="p">[</span><span class="n">naiveData</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">naiveData</span><span class="p">),</span> <span class="n">naiveData</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="nb">sum</span><span class="p">(</span><span class="n">naiveData</span><span class="p">)]</span>
+<span class="n">naive</span>
 </pre></div>
 
     </div>
@@ -13972,7 +13979,7 @@ memory usage: 25.5+ MB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[7]:</div>
+    <div class="prompt output_prompt">Out[15]:</div>
 
 
 
@@ -13990,27 +13997,21 @@ memory usage: 25.5+ MB
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<p>A variável alvo é 0 em 78% das vezes. Portanto, sempre supor que não choverá terá uma chance de acerto de aproximadamente 78%, essa estratégia será chamada de ingênua e será nosso modelo base.</p>
+<p>A variável alvo é 0 em 78% das vezes. Portanto, se sempre supormos que não choverá, então teremos uma chance de acerto de aproximadamente 78%, essa estratégia será chamada de ingênua e será nosso modelo base.</p>
 
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
-</div><div class="inner_cell">
-<div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Multinominal-Naive-Bayes">Multinominal Naive Bayes<a class="anchor-link" href="#Multinominal-Naive-Bayes">&#182;</a></h2>
 </div>
 </div>
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="prompt input_prompt">In&nbsp;[27]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">mnbdata</span> <span class="o">=</span> <span class="n">data_reduced</span>
-<span class="n">to_normalize</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MinTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;MaxTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;Temp9am&quot;</span><span class="p">,</span> <span class="s2">&quot;Temp3pm&quot;</span><span class="p">]</span>
-<span class="n">mnbdata</span><span class="p">[</span><span class="n">to_normalize</span><span class="p">]</span> <span class="o">=</span> <span class="n">minmax_scale</span><span class="p">(</span><span class="n">mnbdata</span><span class="p">[</span><span class="n">to_normalize</span><span class="p">])</span>
-<span class="n">mnbdata</span>
+<div class=" highlight hl-python"><pre><span></span><span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">data_reduced</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">data_reduced</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">naiveCM</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">))</span>
+<span class="n">naiveScores</span> <span class="o">=</span> <span class="n">precision_recall_fscore_support</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="nb">len</span><span class="p">(</span><span class="n">y_test</span><span class="p">)))</span>
 </pre></div>
 
     </div>
@@ -14023,7 +14024,233 @@ memory usage: 25.5+ MB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[8]:</div>
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>              precision    recall  f1-score   support
+
+         0.0       0.78      1.00      0.88     11354
+         1.0       0.00      0.00      0.00      3169
+
+    accuracy                           0.78     14523
+   macro avg       0.39      0.50      0.44     14523
+weighted avg       0.61      0.78      0.69     14523
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Multinominal-Naive-Bayes">Multinominal Naive Bayes<a class="anchor-link" href="#Multinominal-Naive-Bayes">&#182;</a></h2><p>Uma das hipóteses fundamentais desse modelo é que as variáveis independentes são distribuídas normal e independentemente.</p>
+<p>Entretanto, é esperado que os dados aqui usados não sigam essa hipótese.</p>
+<p>Por exemplo, é esperado que as temperaturas influenciem umas as outras.</p>
+<p>Além disso, Esse modelo não aceitou os dados negativos de temperatura, portanto os dados serão normalizados para o intervalo [0, 1].</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[25]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.naive_bayes</span> <span class="kn">import</span> <span class="n">MultinomialNB</span>
+
+
+<span class="n">mnbData</span> <span class="o">=</span> <span class="n">data_reduced</span>
+<span class="n">ColToNormalize</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;MinTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;MaxTemp&quot;</span><span class="p">,</span> <span class="s2">&quot;Temp9am&quot;</span><span class="p">,</span> <span class="s2">&quot;Temp3pm&quot;</span><span class="p">]</span>
+<span class="n">mnbData</span><span class="p">[</span><span class="n">ColToNormalize</span><span class="p">]</span> <span class="o">=</span> <span class="n">minmax_scale</span><span class="p">(</span><span class="n">mnbData</span><span class="p">[</span><span class="n">ColToNormalize</span><span class="p">])</span>
+
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">mnbData</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">mnbData</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">MultiNB</span> <span class="o">=</span> <span class="n">MultinomialNB</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">mnbCM</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">MultiNB</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">))</span>
+<span class="n">mnbScores</span> <span class="o">=</span> <span class="n">precision_recall_fscore_support</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">MultiNB</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">MultiNB</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>              precision    recall  f1-score   support
+
+         0.0       0.91      0.83      0.86     11354
+         1.0       0.53      0.69      0.60      3169
+
+    accuracy                           0.80     14523
+   macro avg       0.72      0.76      0.73     14523
+weighted avg       0.82      0.80      0.81     14523
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Regress&#227;o-Log&#237;stica">Regress&#227;o Log&#237;stica<a class="anchor-link" href="#Regress&#227;o-Log&#237;stica">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.linear_model</span> <span class="kn">import</span> <span class="n">LogisticRegression</span>
+
+
+<span class="n">LogRegData</span> <span class="o">=</span> <span class="n">data_reduced</span>
+<span class="n">LogRegData</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">minmax_scale</span><span class="p">)</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">LogRegData</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">LogRegData</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">LogReg</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">(</span><span class="n">max_iter</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">logregCM</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">LogReg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">))</span> 
+<span class="n">logregScores</span> <span class="o">=</span> <span class="n">precision_recall_fscore_support</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">LogReg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">LogReg</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>              precision    recall  f1-score   support
+
+         0.0       0.88      0.95      0.91     11354
+         1.0       0.73      0.53      0.61      3169
+
+    accuracy                           0.85     14523
+   macro avg       0.81      0.74      0.76     14523
+weighted avg       0.85      0.85      0.85     14523
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Classificador-de-Random-Forest">Classificador de Random Forest<a class="anchor-link" href="#Classificador-de-Random-Forest">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[28]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.ensemble</span> <span class="kn">import</span> <span class="n">RandomForestClassifier</span>
+
+
+<span class="n">rfrData</span> <span class="o">=</span> <span class="n">data_reduced</span>
+<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">rfrData</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">rfrData</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">rfr</span> <span class="o">=</span> <span class="n">RandomForestClassifier</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
+<span class="n">rfrCM</span> <span class="o">=</span> <span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">rfr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">))</span>
+<span class="n">rfrScores</span> <span class="o">=</span> <span class="n">precision_recall_fscore_support</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">rfr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="n">classification_report</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">rfr</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">)))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>              precision    recall  f1-score   support
+
+         0.0       0.88      0.95      0.92     11354
+         1.0       0.77      0.54      0.63      3169
+
+    accuracy                           0.86     14523
+   macro avg       0.82      0.75      0.78     14523
+weighted avg       0.86      0.86      0.85     14523
+
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Compara&#231;&#227;o-dos-Resultados">Compara&#231;&#227;o dos Resultados<a class="anchor-link" href="#Compara&#231;&#227;o-dos-Resultados">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[12]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">resultados</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">naiveCM</span><span class="p">,</span> <span class="n">mnbCM</span><span class="p">,</span> <span class="n">logregCM</span><span class="p">,</span> <span class="n">rfrCM</span><span class="p">])</span>
+<span class="n">resultados</span> <span class="o">=</span> <span class="n">resultados</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="n">x</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">)[</span><span class="mi">0</span><span class="p">])</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">resultados</span><span class="o">.</span><span class="n">to_list</span><span class="p">(),</span>
+ <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;0|0&quot;</span><span class="p">,</span> <span class="s2">&quot;1|0&quot;</span><span class="p">,</span> <span class="s2">&quot;0|1&quot;</span><span class="p">,</span> <span class="s2">&quot;1|1&quot;</span><span class="p">],</span>
+ <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Ingênua&quot;</span><span class="p">,</span> <span class="s2">&quot;Multinomial NB&quot;</span><span class="p">,</span> <span class="s2">&quot;Regressão Logística&quot;</span><span class="p">,</span> <span class="s2">&quot;Random Forest&quot;</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[12]:</div>
 
 
 
@@ -14046,261 +14273,43 @@ memory usage: 25.5+ MB
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>MinTemp</th>
-      <th>MaxTemp</th>
-      <th>Rainfall</th>
-      <th>Evaporation</th>
-      <th>Sunshine</th>
-      <th>WindGustSpeed</th>
-      <th>WindSpeed9am</th>
-      <th>WindSpeed3pm</th>
-      <th>Humidity9am</th>
-      <th>Humidity3pm</th>
-      <th>Pressure9am</th>
-      <th>Pressure3pm</th>
-      <th>Cloud9am</th>
-      <th>Cloud3pm</th>
-      <th>Temp9am</th>
-      <th>Temp3pm</th>
-      <th>RainToday</th>
-      <th>RainTomorrow</th>
+      <th>0|0</th>
+      <th>1|0</th>
+      <th>0|1</th>
+      <th>1|1</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>6049</th>
-      <td>0.645669</td>
-      <td>0.706818</td>
-      <td>0.0</td>
-      <td>12.0</td>
-      <td>12.3</td>
-      <td>48.0</td>
-      <td>6.0</td>
-      <td>20.0</td>
-      <td>20.0</td>
-      <td>13.0</td>
-      <td>1006.3</td>
-      <td>1004.4</td>
-      <td>2.0</td>
-      <td>5.0</td>
-      <td>0.682382</td>
-      <td>0.700472</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>Ingênua</th>
+      <td>11354</td>
+      <td>0</td>
+      <td>3169</td>
+      <td>0</td>
     </tr>
     <tr>
-      <th>6050</th>
-      <td>0.658793</td>
-      <td>0.563636</td>
-      <td>0.0</td>
-      <td>14.8</td>
-      <td>13.0</td>
-      <td>37.0</td>
-      <td>19.0</td>
-      <td>19.0</td>
-      <td>30.0</td>
-      <td>8.0</td>
-      <td>1012.9</td>
-      <td>1012.1</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.526055</td>
-      <td>0.549528</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>Multinomial NB</th>
+      <td>9384</td>
+      <td>1970</td>
+      <td>970</td>
+      <td>2199</td>
     </tr>
     <tr>
-      <th>6052</th>
-      <td>0.685039</td>
-      <td>0.761364</td>
-      <td>0.0</td>
-      <td>10.8</td>
-      <td>10.6</td>
-      <td>46.0</td>
-      <td>30.0</td>
-      <td>15.0</td>
-      <td>42.0</td>
-      <td>22.0</td>
-      <td>1012.3</td>
-      <td>1009.2</td>
-      <td>1.0</td>
-      <td>6.0</td>
-      <td>0.734491</td>
-      <td>0.735849</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>Regressão Logística</th>
+      <td>10743</td>
+      <td>611</td>
+      <td>1496</td>
+      <td>1673</td>
     </tr>
     <tr>
-      <th>6053</th>
-      <td>0.750656</td>
-      <td>0.779545</td>
-      <td>0.0</td>
-      <td>11.4</td>
-      <td>12.2</td>
-      <td>31.0</td>
-      <td>6.0</td>
-      <td>6.0</td>
-      <td>37.0</td>
-      <td>22.0</td>
-      <td>1012.7</td>
-      <td>1009.1</td>
-      <td>1.0</td>
-      <td>5.0</td>
-      <td>0.744417</td>
-      <td>0.752358</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>6054</th>
-      <td>0.811024</td>
-      <td>0.838636</td>
-      <td>0.0</td>
-      <td>11.2</td>
-      <td>8.4</td>
-      <td>35.0</td>
-      <td>17.0</td>
-      <td>13.0</td>
-      <td>19.0</td>
-      <td>15.0</td>
-      <td>1010.7</td>
-      <td>1007.4</td>
-      <td>1.0</td>
-      <td>6.0</td>
-      <td>0.856079</td>
-      <td>0.799528</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>142298</th>
-      <td>0.682415</td>
-      <td>0.665909</td>
-      <td>0.0</td>
-      <td>6.0</td>
-      <td>11.0</td>
-      <td>35.0</td>
-      <td>9.0</td>
-      <td>20.0</td>
-      <td>63.0</td>
-      <td>32.0</td>
-      <td>1013.9</td>
-      <td>1010.5</td>
-      <td>0.0</td>
-      <td>1.0</td>
-      <td>0.630273</td>
-      <td>0.674528</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>142299</th>
-      <td>0.732283</td>
-      <td>0.647727</td>
-      <td>0.0</td>
-      <td>7.6</td>
-      <td>8.6</td>
-      <td>37.0</td>
-      <td>13.0</td>
-      <td>11.0</td>
-      <td>56.0</td>
-      <td>28.0</td>
-      <td>1014.6</td>
-      <td>1011.2</td>
-      <td>7.0</td>
-      <td>0.0</td>
-      <td>0.637717</td>
-      <td>0.667453</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>142300</th>
-      <td>0.719160</td>
-      <td>0.652273</td>
-      <td>0.0</td>
-      <td>5.6</td>
-      <td>11.0</td>
-      <td>33.0</td>
-      <td>17.0</td>
-      <td>11.0</td>
-      <td>46.0</td>
-      <td>23.0</td>
-      <td>1015.3</td>
-      <td>1011.8</td>
-      <td>0.0</td>
-      <td>0.0</td>
-      <td>0.637717</td>
-      <td>0.669811</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>142301</th>
-      <td>0.687664</td>
-      <td>0.629545</td>
-      <td>0.0</td>
-      <td>6.2</td>
-      <td>10.6</td>
-      <td>26.0</td>
-      <td>9.0</td>
-      <td>17.0</td>
-      <td>62.0</td>
-      <td>58.0</td>
-      <td>1014.9</td>
-      <td>1010.7</td>
-      <td>1.0</td>
-      <td>1.0</td>
-      <td>0.637717</td>
-      <td>0.601415</td>
-      <td>0.0</td>
-      <td>0.0</td>
-    </tr>
-    <tr>
-      <th>142302</th>
-      <td>0.706037</td>
-      <td>0.627273</td>
-      <td>0.0</td>
-      <td>5.6</td>
-      <td>10.7</td>
-      <td>30.0</td>
-      <td>15.0</td>
-      <td>7.0</td>
-      <td>73.0</td>
-      <td>32.0</td>
-      <td>1013.9</td>
-      <td>1009.7</td>
-      <td>6.0</td>
-      <td>5.0</td>
-      <td>0.652605</td>
-      <td>0.643868</td>
-      <td>0.0</td>
-      <td>0.0</td>
+      <th>Random Forest</th>
+      <td>10849</td>
+      <td>505</td>
+      <td>1486</td>
+      <td>1683</td>
     </tr>
   </tbody>
 </table>
-<p>58090 rows × 18 columns</p>
 </div>
 </div>
 
@@ -14312,15 +14321,25 @@ memory usage: 25.5+ MB
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[74]:</div>
 <div class="inner_cell">
     <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">mnbdata</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">mnbdata</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<div class=" highlight hl-python"><pre><span></span><span class="n">tabela</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">([</span><span class="n">naiveScores</span><span class="p">,</span> <span class="n">mnbScores</span><span class="p">,</span> <span class="n">logregScores</span><span class="p">,</span> <span class="n">rfrScores</span><span class="p">])</span><span class="o">.</span><span class="n">to_list</span><span class="p">()</span>
+<span class="n">precision</span> <span class="o">=</span> <span class="p">[</span><span class="n">tabela</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">recall</span> <span class="o">=</span> <span class="p">[</span><span class="n">tabela</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">fscore</span> <span class="o">=</span> <span class="p">[</span><span class="n">tabela</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
+<span class="n">support</span> <span class="o">=</span> <span class="p">[</span><span class="n">tabela</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">)]</span>
 
-<span class="n">MultiNB</span> <span class="o">=</span> <span class="n">MultinomialNB</span><span class="p">()</span>
-<span class="n">MultiNB</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="n">confusion_matrix</span><span class="p">(</span><span class="n">y_test</span><span class="p">,</span> <span class="n">MultiNB</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">x_test</span><span class="p">))</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;Precision|0&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">precision</span><span class="p">],</span>
+    <span class="s2">&quot;Precision|1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">precision</span><span class="p">],</span>
+    <span class="s2">&quot;Recall|0&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">recall</span><span class="p">],</span>
+    <span class="s2">&quot;Recall|1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">recall</span><span class="p">],</span>
+    <span class="s2">&quot;F-score|0&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fscore</span><span class="p">],</span>
+    <span class="s2">&quot;F-score|1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">fscore</span><span class="p">],</span>
+    <span class="s2">&quot;Support|0&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">support</span><span class="p">],</span>
+    <span class="s2">&quot;Support|1&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">i</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">support</span><span class="p">],</span>
+<span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;Ingênua&quot;</span><span class="p">,</span> <span class="s2">&quot;Multinomial NB&quot;</span><span class="p">,</span> <span class="s2">&quot;Regressão Logística&quot;</span><span class="p">,</span> <span class="s2">&quot;Random Forest&quot;</span><span class="p">])</span>
 </pre></div>
 
     </div>
@@ -14333,51 +14352,89 @@ memory usage: 25.5+ MB
 
 <div class="output_area">
 
-    <div class="prompt output_prompt">Out[9]:</div>
+    <div class="prompt output_prompt">Out[74]:</div>
 
 
 
+<div class="output_html rendered_html output_subarea output_execute_result">
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
 
-<div class="output_text output_subarea output_execute_result">
-<pre>array([[9384, 1970],
-       [ 970, 2199]], dtype=int64)</pre>
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Precision|0</th>
+      <th>Precision|1</th>
+      <th>Recall|0</th>
+      <th>Recall|1</th>
+      <th>F-score|0</th>
+      <th>F-score|1</th>
+      <th>Support|0</th>
+      <th>Support|1</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Ingênua</th>
+      <td>0.781794</td>
+      <td>0.000000</td>
+      <td>1.000000</td>
+      <td>0.000000</td>
+      <td>0.781794</td>
+      <td>0.000000</td>
+      <td>0.781794</td>
+      <td>0.000000</td>
+    </tr>
+    <tr>
+      <th>Multinomial NB</th>
+      <td>0.906316</td>
+      <td>0.527465</td>
+      <td>0.826493</td>
+      <td>0.693910</td>
+      <td>0.906316</td>
+      <td>0.527465</td>
+      <td>0.906316</td>
+      <td>0.527465</td>
+    </tr>
+    <tr>
+      <th>Regressão Logística</th>
+      <td>0.877768</td>
+      <td>0.732487</td>
+      <td>0.946186</td>
+      <td>0.527927</td>
+      <td>0.877768</td>
+      <td>0.732487</td>
+      <td>0.877768</td>
+      <td>0.732487</td>
+    </tr>
+    <tr>
+      <th>Random Forest</th>
+      <td>0.881458</td>
+      <td>0.767025</td>
+      <td>0.954201</td>
+      <td>0.540234</td>
+      <td>0.881458</td>
+      <td>0.767025</td>
+      <td>0.881458</td>
+      <td>0.767025</td>
+    </tr>
+  </tbody>
+</table>
+</div>
 </div>
 
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train Score: </span><span class="si">{</span><span class="n">MultiNB</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test Score: </span><span class="si">{</span><span class="n">MultiNB</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-
-<span class="k">del</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Train Score: 0.792733031881929
-Test Score: 0.7975624870894443
-</pre>
-</div>
 </div>
 
 </div>
@@ -14387,96 +14444,10 @@ Test Score: 0.7975624870894443
 <div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
 </div><div class="inner_cell">
 <div class="text_cell_render border-box-sizing rendered_html">
-<h2 id="Regress&#227;o-Log&#237;stica">Regress&#227;o Log&#237;stica<a class="anchor-link" href="#Regress&#227;o-Log&#237;stica">&#182;</a></h2>
-</div>
-</div>
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="n">reglogdata</span> <span class="o">=</span> <span class="n">data_reduced</span>
-<span class="n">reglogdata</span><span class="o">.</span><span class="n">apply</span><span class="p">(</span><span class="n">minmax_scale</span><span class="p">)</span>
-<span class="n">x_train</span><span class="p">,</span> <span class="n">x_test</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">y_test</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">reglogdata</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">],</span> <span class="n">reglogdata</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:,</span> <span class="o">-</span><span class="mi">1</span><span class="p">])</span>
-<span class="n">LogReg</span> <span class="o">=</span> <span class="n">LogisticRegression</span><span class="p">()</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stderr output_text">
-<pre>C:\Users\Renan\AppData\Local\Programs\Python\Python38\lib\site-packages\sklearn\linear_model\_logistic.py:762: ConvergenceWarning: lbfgs failed to converge (status=1):
-STOP: TOTAL NO. of ITERATIONS REACHED LIMIT.
-
-Increase the number of iterations (max_iter) or scale the data as shown in:
-    https://scikit-learn.org/stable/modules/preprocessing.html
-Please also refer to the documentation for alternative solver options:
-    https://scikit-learn.org/stable/modules/linear_model.html#logistic-regression
-  n_iter_i = _check_optimize_result(
-</pre>
-</div>
-</div>
+<h1 id="Conclus&#245;es">Conclus&#245;es<a class="anchor-link" href="#Conclus&#245;es">&#182;</a></h1><p>O modelo mais apropriado parece ser o Random Forest.</p>
 
 </div>
 </div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[12]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Train Score: </span><span class="si">{</span><span class="n">LogReg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Test Score: </span><span class="si">{</span><span class="n">LogReg</span><span class="o">.</span><span class="n">score</span><span class="p">(</span><span class="n">x_test</span><span class="p">,</span> <span class="n">y_test</span><span class="p">)</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
-</pre></div>
-
-    </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area">
-
-    <div class="prompt"></div>
-
-
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Train Score: 0.8518373998668717
-Test Score: 0.8497555601459753
-</pre>
-</div>
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span> 
-</pre></div>
-
-    </div>
-</div>
-</div>
-
 </div>
     </div>
   </div>
